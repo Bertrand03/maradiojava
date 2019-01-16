@@ -13,7 +13,7 @@ public class Artist {
     private Integer id;
 
     @Column(name = "Name")
-    private String Name;
+    private String name;
 
     public Artist(){
 
@@ -21,7 +21,7 @@ public class Artist {
 
     public Artist(Integer id, String name) {
         this.id = id;
-        Name = name;
+        name = name;
     }
 
     public Integer getId() {
@@ -33,11 +33,11 @@ public class Artist {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        name = name;
     }
     @OneToMany(mappedBy = "artist") //on met entre parenthèses après mappedBy, le nom de la table en bdd
     @JsonBackReference
