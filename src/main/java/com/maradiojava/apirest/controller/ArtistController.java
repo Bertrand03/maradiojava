@@ -5,6 +5,7 @@ import com.maradiojava.apirest.model.Artist;
 import com.maradiojava.apirest.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,12 +63,12 @@ public class ArtistController {
     @RequestMapping(
             method = RequestMethod.DELETE,
             value = "/{ArtistId}")
+    @ResponseStatus (value = HttpStatus.NO_CONTENT)
 
-    public void supprimerArtist(
+    public @ResponseBody void supprimerArtist(
             @PathVariable("ArtistId") Integer ArtistId,
             @RequestBody Artist artist) {
         artistService.supprimerArtist(ArtistId);
-
     }
 }
 
