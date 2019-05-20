@@ -1,5 +1,6 @@
 package com.maradiojava.apirest.controller;
 
+import com.maradiojava.apirest.model.Album;
 import com.maradiojava.apirest.model.Artist;
 import com.maradiojava.apirest.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,27 @@ public class ArtistController {
     public Artist ajouterArtist(
             @RequestBody Artist artist) {
             return this.artistService.ajouterArtist(artist);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            value = "/{ArtistId}")
+
+    public Artist modifierArtist(
+            @PathVariable("ArtistId") Integer ArtistId,
+            @RequestBody Artist artist) {
+        return artistService.modifierArtist(ArtistId, artist);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/{ArtistId}")
+
+    public void supprimerArtist(
+            @PathVariable("ArtistId") Integer ArtistId,
+            @RequestBody Artist artist) {
+        artistService.supprimerArtist(ArtistId);
+
     }
 }
 

@@ -80,6 +80,16 @@ import java.util.Scanner;
         return artistRepository.save(artist);
     }
 
+    public Artist modifierArtist(Integer ArtistId, Artist artist) {
+
+        return artistRepository.save(artist);
+    }
+
+    public void supprimerArtist(Integer ArtistId){
+
+        artistRepository.delete(ArtistId);
+    }
+
 
 
 
