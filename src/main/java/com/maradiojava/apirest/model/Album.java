@@ -1,5 +1,6 @@
 package com.maradiojava.apirest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,6 +9,12 @@ import javax.persistence.*;
 @Table(name = "Album")
 public class Album {
 
+    @ManyToOne
+    @JsonBackReference
+
+    @JoinColumn(name = "ArtistId")
+    private Artist artist;
+
     @Id
     @Column(name = "AlbumId")
     private Integer id;
@@ -15,13 +22,22 @@ public class Album {
     @Column(name = "Title")
     private String Title;
 
-    @JoinColumn(name = "ArtistId")
-    private Integer ArtistId;
+    public Album() {
 
-    public Album(Integer id, String title, Integer artistId) {
+    }
+
+    public Album(Artist artist, Integer id, String Title) {
+        this.artist = artist;
         this.id = id;
-        Title = title;
-        ArtistId = artistId;
+        this.Title = Title;
+
+    }
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     public Integer getId() {
@@ -36,31 +52,8 @@ public class Album {
         return Title;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 
-    public Integer getArtistId() {
-        return ArtistId;
-    }
-
-    public void setArtistId(Integer artistId) {
-        ArtistId = artistId;
-    }
-
-    @ManyToOne
-    @JsonManagedReference
-    private Artist artist;
-
-    public Album(Artist artist) {
-        this.artist = artist;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
 }

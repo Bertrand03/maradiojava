@@ -1,27 +1,45 @@
 package com.maradiojava.apirest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Artist")
+@Table(name="Artist")
 public class Artist {
+
+    @OneToMany(mappedBy = "artist")
+    @JsonManagedReference
+    //@JsonBackReference
+    @JsonIgnoreProperties("artist")
+    private List<Album> discographie;
+
     @Id
-    @Column( name = "ArtistId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "ArtistId")
     private Integer id;
 
-    @Column(name = "Name")
+    @Column (name = "Name")
     private String name;
 
-    public Artist(){
-
+    public Artist() {
     }
 
-    public Artist(Integer id, String name) {
+    public Artist(List<Album> discographie, Integer id, String name) {
+        this.discographie = discographie;
         this.id = id;
-        name = name;
+        this.name = name;
+    }
+
+    public List<Album> getDiscographie() {
+        return discographie;
+    }
+
+    public void setDiscographie(List<Album> discographie) {
+        this.discographie = discographie;
     }
 
     public Integer getId() {
@@ -37,17 +55,6 @@ public class Artist {
     }
 
     public void setName(String name) {
-        name = name;
-    }
-    @OneToMany(mappedBy = "artist") //on met entre parenthèses après mappedBy, le nom de la table en bdd
-    @JsonBackReference
-    private List<Album>discographie;
-
-    public List<Album> getDiscographie() {
-        return discographie;
-    }
-
-    public void setDiscographie(List<Album> discographie) {
-        this.discographie = discographie;
+        this.name = name;
     }
 }

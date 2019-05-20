@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
     public class ArtistService{
@@ -29,12 +30,13 @@ import java.util.List;
         }
 
     public List<Artist> afficherArtiste2(String name) {
-        List<Artist> a = artistRepository.findByName(name);{
-        //if(a == null){
-            //throw new EntityNotFoundException("L'artiste avec le nom " + name + " n'existe pas");
-        }
-        return a;
+            List<Artist> a = artistRepository.findByName(name);{
+                //if(a == null){
+                //throw new EntityNotFoundException("L'artiste avec le nom " + name + " n'existe pas");
+            }
+            return a;
     }
+
     public Long comptageArtistes() {
         Long e = artistRepository.count();
         return e;
@@ -72,6 +74,19 @@ import java.util.List;
         }
         return artistRepository.findAll(pageable);
     }
+
+    public Artist ajouterArtist(Artist artist) {
+
+        return artistRepository.save(artist);
+    }
+
+
+
+
+
+
+
+
 }
 
 

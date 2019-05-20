@@ -13,18 +13,18 @@ import java.util.List;
 public class ArtistController {
     @Autowired
     private ArtistService artistService;
+
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{artistId}")
+            value = "/{ArtistId}")
 
     public Artist afficherArtiste(
-            @PathVariable("artistId") Integer artistId) {
-        return this.artistService.afficherArtiste(artistId);
+            @PathVariable("ArtistId") Integer ArtistId) {
+        return this.artistService.afficherArtiste(ArtistId);
     }
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/artist",
             params = "name")
 
     public List<Artist> afficherArtiste2(
@@ -39,6 +39,24 @@ public class ArtistController {
             @RequestParam("sortProperty") String sortProperty){
         return artistService.findTousArtistes(page, size, sortProperty, sortDirection);
     }
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "")
 
-
+    public Artist ajouterArtist(
+            @RequestBody Artist artist) {
+            return this.artistService.ajouterArtist(artist);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
