@@ -45,9 +45,9 @@ public class ArtistController {
             method = RequestMethod.POST,
             value = "")
 
-    public Artist ajouterArtist(
+    public Artist ajouterArtist (
             @RequestBody Artist artist) {
-            return this.artistService.ajouterArtist(artist);
+            return artistService.ajouterArtist(artist);
     }
 
     @RequestMapping(
@@ -66,8 +66,8 @@ public class ArtistController {
     @ResponseStatus (value = HttpStatus.NO_CONTENT)
 
     public @ResponseBody void supprimerArtist(
-            @PathVariable("ArtistId") Integer ArtistId,
-            @RequestBody Artist artist) {
+            @PathVariable("ArtistId") Integer ArtistId){
+
         artistService.supprimerArtist(ArtistId);
     }
 }

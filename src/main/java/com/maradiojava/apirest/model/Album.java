@@ -1,7 +1,6 @@
 package com.maradiojava.apirest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -9,27 +8,28 @@ import javax.persistence.*;
 @Table(name = "Album")
 public class Album {
 
+
     @ManyToOne
     @JsonBackReference
-
     @JoinColumn(name = "ArtistId")
     private Artist artist;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "AlbumId")
     private Integer id;
 
     @Column(name = "Title")
-    private String Title;
+    private String title;
 
     public Album() {
 
     }
 
-    public Album(Artist artist, Integer id, String Title) {
+    public Album(Artist artist, Integer id, String title) {
         this.artist = artist;
         this.id = id;
-        this.Title = Title;
+        this.title = title;
 
     }
     public Artist getArtist() {
@@ -49,11 +49,11 @@ public class Album {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

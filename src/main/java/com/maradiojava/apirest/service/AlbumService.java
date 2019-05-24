@@ -1,4 +1,27 @@
 package com.maradiojava.apirest.service;
 
-public class AlbumService {
+import com.maradiojava.apirest.model.Album;
+import com.maradiojava.apirest.repository.AlbumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+    public class AlbumService{
+        public static final Integer PAGE_SIZE_MIN = 10;
+        public static final Integer PAGE_SIZE_MAX = 100;
+        public static final Integer PAGE_MIN = 0;
+
+@Autowired
+        private AlbumRepository albumRepository;
+
+    public Album ajouterAlbum(Album album) {
+
+        return albumRepository.save(album);
+    }
+
+
+    public void supprimerAlbum(Integer id) {
+
+        albumRepository.delete(id);
+    }
 }

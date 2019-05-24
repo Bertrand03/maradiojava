@@ -1,6 +1,5 @@
 package com.maradiojava.apirest.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -13,9 +12,8 @@ public class Artist {
 
     @OneToMany(mappedBy = "artist")
     @JsonManagedReference
-    //@JsonBackReference
     @JsonIgnoreProperties("artist")
-    private List<Album> discographie;
+    private List<Album> albums;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,18 +26,18 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(List<Album> discographie, Integer id, String name) {
-        this.discographie = discographie;
+    public Artist(List<Album> albums, Integer id, String name) {
+        this.albums = albums;
         this.id = id;
         this.name = name;
     }
 
-    public List<Album> getDiscographie() {
-        return discographie;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
-    public void setDiscographie(List<Album> discographie) {
-        this.discographie = discographie;
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
     public Integer getId() {

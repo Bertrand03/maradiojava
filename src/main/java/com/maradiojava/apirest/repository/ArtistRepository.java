@@ -10,7 +10,7 @@ import java.util.List;
 public interface ArtistRepository extends JpaRepository<Artist, Integer>{ //il faut préciser qu'il faut travailler avec le JpaRepository, on précise la classe et le type de la clé primaire
     Artist findById (Integer id);
 
-    @Query(value="SELECT * FROM artist WHERE Name LIKE :name%",nativeQuery=true)
+    @Query(value="SELECT * FROM artist WHERE Name LIKE %:name%",nativeQuery=true) //pour rechercher tous les noms (featuring par exemple)
     List <Artist> findByName (@Param("name") String name);
 
 }
