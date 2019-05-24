@@ -1,5 +1,6 @@
 package com.maradiojava.apirest.controller;
 
+import com.maradiojava.apirest.exception.ConflictException;
 import com.maradiojava.apirest.model.Album;
 import com.maradiojava.apirest.model.Artist;
 import com.maradiojava.apirest.service.ArtistService;
@@ -46,18 +47,18 @@ public class ArtistController {
             value = "")
 
     public Artist ajouterArtist (
-            @RequestBody Artist artist) {
+            @RequestBody Artist artist) throws ConflictException {
             return artistService.ajouterArtist(artist);
     }
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/{ArtistId}")
+            value = "/{id}")
 
     public Artist modifierArtist(
-            @PathVariable("ArtistId") Integer ArtistId,
-            @RequestBody Artist artist) {
-        return artistService.modifierArtist(ArtistId, artist);
+            @PathVariable("id") Integer id,
+            @RequestBody Artist artist) throws ConflictException{
+        return artistService.modifierArtist(id, artist);
     }
 
     @RequestMapping(

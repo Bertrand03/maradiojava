@@ -4,5 +4,4 @@ import com.maradiojava.apirest.model.Artist;
 
 public class ArtistException extends Throwable {
 
-
 }

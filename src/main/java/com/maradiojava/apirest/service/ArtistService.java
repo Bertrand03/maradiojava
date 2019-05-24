@@ -1,5 +1,6 @@
 package com.maradiojava.apirest.service;
 
+import com.maradiojava.apirest.exception.ConflictException;
 import com.maradiojava.apirest.model.Artist;
 import com.maradiojava.apirest.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,12 +76,19 @@ import java.util.Scanner;
         return artistRepository.findAll(pageable);
     }
 
-    public Artist ajouterArtist(Artist artist) {
+    public Artist ajouterArtist(Artist artist) throws ConflictException { //Declaration de la méthode ajouterArtist qui lancera si besoin ConflictException
+        if(artistRepository.findByName(artist.getName()) != null){ //On utilise la méthode findByName de artistRepository qui fait appel au constructeur
+                                                                // getName() de la classe artist
+            throw new ConflictException(artist.getName() + " existe déjà"); // Lance ConflictException avec le message voulu
+        }
 
         return artistRepository.save(artist);
-    }
+}
 
-    public Artist modifierArtist(Integer ArtistId, Artist artist) {
+    public Artist modifierArtist(Integer ArtistId, Artist artist) throws ConflictException {
+        if (artistRepository.findByName(artist.getName()) != null){
+            throw new ConflictException(artist.getName() + " ne peut pas être modifié car il existe déjà");
+        }
 
         return artistRepository.save(artist);
     }

@@ -1,5 +1,6 @@
 package com.maradiojava.apirest.controller;
 
+import com.maradiojava.apirest.exception.ConflictException;
 import com.maradiojava.apirest.model.Album;
 import com.maradiojava.apirest.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AlbumController {
             value = "")
 
     public Album ajouterAlbum(
-         @RequestBody Album album) {
+         @RequestBody Album album)throws ConflictException {
     return albumService.ajouterAlbum(album);
          }
 
